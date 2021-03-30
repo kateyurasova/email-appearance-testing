@@ -1,5 +1,9 @@
-
 class LitmusBuilderPage {
+
+    open() {
+        cy.visit('/folders/unsorted_emails/emails/2650141/builder');
+        this.waitForPageLoading();
+    }
 
     get iFrameLoadingTimeout() {
         return 5000;
@@ -20,13 +24,12 @@ class LitmusBuilderPage {
         cy.wait(this.iFrameLoadingTimeout);
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
-            cy.wrap($body).contains(deviceName).click({force: true});
+            cy.wrap($body).contains(deviceName).should('be.visible').click({force: true});
         })
     }
 
 
     closeDeviceView() {
-        cy.wait(5000);
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
             cy.wrap($body).find('.icon-cross').first().click({force: true});
@@ -61,11 +64,9 @@ class LitmusBuilderPage {
         cy.log('expectedFileName: ' + expectedFileName);
         this.getFixtureFromFolder(folderName, expectedFileName).then(expectedScreen => {
             this.getFixtureFromFolder(folderName, actualFileName).then(actualScreen => {
-                Cypress.Blob.base64StringToBlob(actualScreen, fileType).then((actualBlob) => {
-                    Cypress.Blob.base64StringToBlob(expectedScreen, fileType).then((expectedBlob) => {
-                        expect(actualBlob).to.deep.equal(expectedBlob);
-                    })
-                })
+                const actualBlob = Cypress.Blob.base64StringToBlob(actualScreen, fileType);
+                const expectedBlob = Cypress.Blob.base64StringToBlob(actualScreen, fileType);
+                expect(actualBlob).to.deep.equal(expectedBlob);
             })
         })
     }

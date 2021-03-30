@@ -1,8 +1,10 @@
 import LitmusLoginPage from "../../page-objects/litmus/LitmusLoginPage";
 import LitmusBuilderPage from "../../page-objects/litmus/LitmusBuilderPage";
 
-const testingData = [{device: 'Apple Mail 13 (macOS 10.15)'},
-    {device: 'Apple Mail 13 Dark (macOS 10.15)'}
+const testingData = [
+    'Apple Mail 13 (macOS 10.15)'/*,
+    'Apple Mail 13 Dark (macOS 10.15)',
+    'Apple Mail 14 (macOS 11.0)'*/
 ]
 
 describe('Notification View in Litmus', function () {
@@ -12,22 +14,18 @@ describe('Notification View in Litmus', function () {
         LitmusLoginPage.open();
         cy.log('AND performs log in action')
         LitmusLoginPage.login(Cypress.env('litmusCredentials').login, Cypress.env('litmusCredentials').password);
-        cy.visit("https://litmus.com/folders/unsorted_emails/emails/2650141/builder");
         cy.log('AND User clicks Run Email Previews button');
+        LitmusBuilderPage.open()
         LitmusBuilderPage.clickRunEmailPreviews();
-        cy.wait(15000);
     })
 
-    afterEach(() => {
-        LitmusBuilderPage.closeDeviceView();
-    })
-
-    testingData.forEach(({device, testId}) => {
-        it(`Test notification image ${device} ${testId}`, function () {
+    testingData.forEach((device) => {
+        it(`Test notification image ${device}`, function () {
             cy.log(`AND selects device ${device}`)
             LitmusBuilderPage.selectDevice(device);
             cy.log('THEN Image presented at the page is equal to the expected screen');
             LitmusBuilderPage.checkDeviceNotificationImage(device);
+            LitmusBuilderPage.closeDeviceView();
         });
     })
 });

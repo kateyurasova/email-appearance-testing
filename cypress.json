@@ -1,4 +1,5 @@
 {
+  "baseUrl": "https://litmus.com",
   "env": {
     "notificationScreenFolder": "notificationScreen",
     "litmusCredentials": {
