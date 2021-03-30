@@ -1,0 +1,9 @@
+{
+  "env": {
+    "notificationScreenFolder": "notificationScreen",
+    "litmusCredentials": {
+      "login": "********",
+      "password": "*******"
+    }
+  }
+}
