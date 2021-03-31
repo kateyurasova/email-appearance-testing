@@ -2,9 +2,13 @@ import LitmusLoginPage from "../../page-objects/litmus/LitmusLoginPage";
 import LitmusBuilderPage from "../../page-objects/litmus/LitmusBuilderPage";
 
 const testingData = [
-    'Apple Mail 13 (macOS 10.15)'/*,
+    'Apple Mail 13 (macOS 10.15)',
     'Apple Mail 13 Dark (macOS 10.15)',
-    'Apple Mail 14 (macOS 11.0)'*/
+    'Apple Mail 14 (macOS 11.0)',
+    'Apple Mail 14 Dark (macOS 11.0)',
+    'IBM Notes 10 (Windows 10)',
+    'Lotus Notes 8.5 (Windows 10)',
+    'Outlook 2019 120 DPI (Windows 10)'
 ]
 
 describe('Notification View in Litmus', function () {
@@ -19,13 +23,13 @@ describe('Notification View in Litmus', function () {
         LitmusBuilderPage.clickRunEmailPreviews();
     })
 
-    testingData.forEach((device) => {
-        it(`Test notification image ${device}`, function () {
-            cy.log(`AND selects device ${device}`)
-            LitmusBuilderPage.selectDevice(device);
+    testingData.forEach((configuration) => {
+        it(`Test notification image ${configuration}`, function () {
+            cy.log(`AND selects device ${configuration}`)
+            LitmusBuilderPage.selectConfiguration(configuration);
             cy.log('THEN Image presented at the page is equal to the expected screen');
-            LitmusBuilderPage.checkDeviceNotificationImage(device);
-            LitmusBuilderPage.closeDeviceView();
+            LitmusBuilderPage.checkConfigurationNotificationImage(configuration);
+            LitmusBuilderPage.closeConfigView();
         });
     })
 });

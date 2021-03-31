@@ -6,7 +6,7 @@ class LitmusBuilderPage {
     }
 
     get iFrameLoadingTimeout() {
-        return 5000;
+        return 10000;
     }
 
     waitForPageLoading() {
@@ -20,16 +20,16 @@ class LitmusBuilderPage {
         })
     }
 
-    selectDevice(deviceName) {
-        cy.wait(this.iFrameLoadingTimeout);
+    selectConfiguration(deviceName) {
+        cy.wait(5000);
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
-            cy.wrap($body).contains(deviceName).should('be.visible').click({force: true});
+            cy.wrap($body).contains(deviceName).should('exist').click({force: true});
         })
     }
 
 
-    closeDeviceView() {
+    closeConfigView() {
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
             cy.wrap($body).find('.icon-cross').first().click({force: true});
@@ -37,7 +37,7 @@ class LitmusBuilderPage {
     }
 
     downloadImage(fullPath, fileName) {
-        cy.wait(this.iFrameLoadingTimeout);
+        cy.wait(5000);
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
             cy.wrap($body).find('.result img').then(($image => {
@@ -50,13 +50,18 @@ class LitmusBuilderPage {
         })
     }
 
-    checkDeviceNotificationImage(deviceName) {
-        const folderName = Cypress.env('notificationScreenFolder');
-        const fullPath = `cypress/fixtures/${folderName}`;
+    checkConfigurationNotificationImage(deviceName) {
+        const fullPath = `cypress/fixtures/${Cypress.env('notificationScreenFolder')}`;
         const actualFileName = `${deviceName} Actual.png`;
         const expectedFileName = `${deviceName} Expected.png`;
         this.downloadImage(fullPath, actualFileName);
-        this.compareImages(folderName, expectedFileName, actualFileName);
+        this.compareImages(Cypress.env('notificationScreenFolder'), expectedFileName, actualFileName);
+    }
+
+    saveNotificationForConfig(config, name_part) {
+        const fullPath = `cypress/fixtures/${Cypress.env('notificationScreenFolder')}`;
+        const actualFileName = `${config} ${name_part}.png`;
+        this.downloadImage(fullPath, actualFileName);
     }
 
     compareImages(folderName, expectedFileName, actualFileName) {
