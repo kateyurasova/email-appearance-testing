@@ -5,10 +5,6 @@ class LitmusBuilderPage {
         this.waitForPageLoading();
     }
 
-    get iFrameLoadingTimeout() {
-        return 10000;
-    }
-
     waitForPageLoading() {
         cy.wait('@category');
     }
@@ -21,7 +17,7 @@ class LitmusBuilderPage {
     }
 
     selectConfiguration(deviceName) {
-        cy.wait(5000);
+        cy.wait(Cypress.env('waitTime'));
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
             cy.wrap($body).contains(deviceName).should('exist').click({force: true});
@@ -37,7 +33,7 @@ class LitmusBuilderPage {
     }
 
     downloadImage(fullPath, fileName) {
-        cy.wait(5000);
+        cy.wait(Cypress.env('waitTime'));
         cy.get('iframe.builder').then(function ($iframe) {
             const $body = $iframe.contents().find('body');
             cy.wrap($body).find('.result img').then(($image => {

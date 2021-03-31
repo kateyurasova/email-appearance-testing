@@ -12,7 +12,7 @@ describe('Notification View in Litmus', function () {
         cy.log('AND User clicks Run Email Previews button');
         LitmusBuilderPage.open()
         LitmusBuilderPage.clickRunEmailPreviews();
-        cy.wait(10000);
+        cy.wait(Cypress.env('waitTime'));
         cy.writeFile(FIXTURE_FILE, `{\n"allConfigArray": [\n`)
     })
 
