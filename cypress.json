@@ -2,7 +2,8 @@
   "baseUrl": "https://litmus.com",
   "pageLoadTimeout": 120000,
   "env": {
-    "notificationScreenFolder": "notificationScreen1",
+    "notificationScreenFolder": "notificationScreen",
+    "notificationScreenFolderAPI": "notificationScreenAPI",
     "waitTime": 10000,
     "litmusCredentials": {
       "login": "********",

@@ -1,9 +1,9 @@
-import LitmusLoginPage from "../../page-objects/litmus/LitmusLoginPage";
-import LitmusBuilderPage from "../../page-objects/litmus/LitmusBuilderPage";
+import LitmusLoginPage from "../../../../page-objects/litmus/LitmusLoginPage";
+import LitmusBuilderPage from "../../../../page-objects/litmus/LitmusBuilderPage";
 
 const testingData = [
-    "Apple Mail 13 (macOS 10.15)"/*,
-    "Apple Mail 13 Dark (macOS 10.15)",
+    "Apple Mail 13 (macOS 10.15)",
+    "Apple Mail 13 Dark (macOS 10.15)"/*,
     "Apple Mail 14 (macOS 11.0)",
     "Apple Mail 14 Dark (macOS 11.0)",
     "IBM Notes 10 (Windows 10)",

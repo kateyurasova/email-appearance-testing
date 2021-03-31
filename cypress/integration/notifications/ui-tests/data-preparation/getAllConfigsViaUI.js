@@ -1,5 +1,5 @@
-import LitmusLoginPage from "../../page-objects/litmus/LitmusLoginPage";
-import LitmusBuilderPage from "../../page-objects/litmus/LitmusBuilderPage";
+import LitmusLoginPage from "../../../../page-objects/litmus/LitmusLoginPage";
+import LitmusBuilderPage from "../../../../page-objects/litmus/LitmusBuilderPage";
 
 describe('Notification View in Litmus', function () {
     const FIXTURE_FILE = 'cypress/fixtures/array.json';
