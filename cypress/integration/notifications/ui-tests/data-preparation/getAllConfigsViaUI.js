@@ -2,7 +2,7 @@ import LitmusLoginPage from "../../../../page-objects/litmus/LitmusLoginPage";
 import LitmusBuilderPage from "../../../../page-objects/litmus/LitmusBuilderPage";
 
 describe('Notification View in Litmus', function () {
-    const FIXTURE_FILE = 'cypress/fixtures/array.json';
+    const FIXTURE_FILE = 'cypress/fixtures/all-configs-viaUI.json';
     before(() => {
         LitmusBuilderPage.routeRequests();
         cy.log('WHEN User goes to the Litmus Login page');

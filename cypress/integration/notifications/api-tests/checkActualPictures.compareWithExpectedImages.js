@@ -1,10 +1,7 @@
 import * as litmusData from "../../../fixtures/litmus-data.json"
-import LitmusLoginPage from "../../../page-objects/litmus/LitmusLoginPage";
 import LitmusBuilderPage from "../../../page-objects/litmus/LitmusBuilderPage";
 
 describe('Notification View in Litmus', function () {
-    const FIXTURE_FILE = 'cypress/fixtures/array.json';
-
     before(() => {
         litmusData.array.forEach(notificationData => {
             console.log(notificationData);
