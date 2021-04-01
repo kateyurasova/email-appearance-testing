@@ -20,7 +20,6 @@ describe('Notification View in Litmus', function () {
             let urlArray = notificationData.full_url.split('/');
             let expectedImageFileName = `expected-${urlArray[urlArray.length - 1]}`;
             let actualImageFileName = `actual-${urlArray[urlArray.length - 1]}`;
-            //let actualImageFileName = `actual-android10gmailapp-vertical-allowed-1366.png`;
             cy.compareImages(Cypress.env('notificationScreenFolderAPI'), expectedImageFileName,
                 actualImageFileName);
         })

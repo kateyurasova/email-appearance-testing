@@ -46,31 +46,11 @@ class LitmusBuilderPage {
         })
     }
 
-    checkConfigurationNotificationImage(deviceName) {
-        const fullPath = `cypress/fixtures/${Cypress.env('notificationScreenFolder')}`;
-        const actualFileName = `${deviceName} Actual.png`;
-        const expectedFileName = `${deviceName} Expected.png`;
-        this.downloadImage(fullPath, actualFileName);
-        cy.compareImages(Cypress.env('notificationScreenFolder'), expectedFileName, actualFileName);
-    }
-
     saveNotificationForConfig(config, name_part) {
         const fullPath = `cypress/fixtures/${Cypress.env('notificationScreenFolder')}`;
         const actualFileName = `${config} ${name_part}.png`;
         this.downloadImage(fullPath, actualFileName);
     }
-
-    /*compareImages(folderName, expectedFileName, actualFileName) {
-        const fileType = 'image/png';
-        cy.log('expectedFileName: ' + expectedFileName);
-        this.getFixtureFromFolder(folderName, expectedFileName).then(expectedScreen => {
-            this.getFixtureFromFolder(folderName, actualFileName).then(actualScreen => {
-                const actualBlob = Cypress.Blob.base64StringToBlob(actualScreen, fileType);
-                const expectedBlob = Cypress.Blob.base64StringToBlob(expectedScreen, fileType);
-                expect(actualBlob).to.deep.equal(expectedBlob);
-            })
-        })
-    }*/
 
     getFixtureFromFolder(folderName, fileName) {
         return cy.fixture(`${folderName}/${fileName}`)
