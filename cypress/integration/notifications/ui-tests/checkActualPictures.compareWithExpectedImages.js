@@ -9,6 +9,7 @@ const testingData = [
     'Outlook 2019 120 DPI (Windows 10)'
 ]
 
+const fullPath = `cypress/fixtures/${Cypress.env('notificationScreenFolder')}`;
 describe('Notification View in Litmus', function () {
     before(() => {
         LitmusBuilderPage.routeRequests();
@@ -27,6 +28,12 @@ describe('Notification View in Litmus', function () {
             LitmusBuilderPage.selectConfiguration(configuration);
             cy.log('THEN Image presented at the page is equal to the expected screen');
             LitmusBuilderPage.checkConfigurationNotificationImage(configuration);
+
+            const actualFileName = `${configuration} Actual.png`;
+            const expectedFileName = `${configuration} Expected.png`;
+            LitmusBuilderPage.downloadImage(fullPath, actualFileName);
+            cy.compareImages(Cypress.env('notificationScreenFolder'), expectedFileName, actualFileName);
+
             LitmusBuilderPage.closeConfigView();
         });
     })

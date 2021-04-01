@@ -23,3 +23,19 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('compareImages', (folderName, expectedFileName, actualFileName) => {
+    const fileType = 'image/png';
+    cy.log('expectedFileName: ' + expectedFileName);
+    cy.getFixtureFromFolder(folderName, expectedFileName).then(expectedScreen => {
+        cy.getFixtureFromFolder(folderName, actualFileName).then(actualScreen => {
+            const actualBlob = Cypress.Blob.base64StringToBlob(actualScreen, fileType);
+            const expectedBlob = Cypress.Blob.base64StringToBlob(expectedScreen, fileType);
+            expect(actualBlob).to.deep.equal(expectedBlob);
+        })
+    })
+});
+
+Cypress.Commands.add('getFixtureFromFolder', (folderName, fileName) => {
+    return cy.fixture(`${folderName}/${fileName}`)
+});

@@ -3,7 +3,7 @@ import LitmusBuilderPage from "../../../page-objects/litmus/LitmusBuilderPage";
 
 describe('Notification View in Litmus', function () {
     before(() => {
-        litmusData.array.forEach(notificationData => {
+        litmusData.imagesData.forEach(notificationData => {
             console.log(notificationData);
             let urlArray = notificationData.full_url.split('/');
             let fileName = `actual-${urlArray[urlArray.length - 1]}`;
@@ -16,11 +16,12 @@ describe('Notification View in Litmus', function () {
         cy.log("Test");
         const fullPath = `cypress/fixtures/${Cypress.env('notificationScreenFolderAPI')}`;
 
-        litmusData.array.forEach(notificationData => {
+        litmusData.imagesData.forEach(notificationData => {
             let urlArray = notificationData.full_url.split('/');
             let expectedImageFileName = `expected-${urlArray[urlArray.length - 1]}`;
             let actualImageFileName = `actual-${urlArray[urlArray.length - 1]}`;
-            LitmusBuilderPage.compareImages(Cypress.env('notificationScreenFolderAPI'), expectedImageFileName,
+            //let actualImageFileName = `actual-android10gmailapp-vertical-allowed-1366.png`;
+            cy.compareImages(Cypress.env('notificationScreenFolderAPI'), expectedImageFileName,
                 actualImageFileName);
         })
 
